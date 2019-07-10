@@ -11,6 +11,14 @@ import UIKit
 @objc public class TestBC: NSObject {
     private static let SIZE = 256; // 全局变量或成员变量
     
+    @objc public static func test1() {
+        let a:[Character] = ["c","a","b","c","a","b","a","c","a","c","a"]
+        let b:[Character] = ["a","c","a","c","a"]
+
+        let result = TestBC.bm(a: a, n: a.count, b: b, m: b.count)
+        print("result:\(result)")
+    }
+    
     static func generateBC(b: [Character], m: Int, bc: inout [Int]) {
         for i in 0..<m {
             let ascii = Int(b[i].asciiValue ?? 0) // 计算 b[i] 的 ASCII 值
@@ -56,12 +64,13 @@ import UIKit
         var i = 0; // j 表示主串与模式串匹配的第一个字符
         while (i <= n - m) {
             var j = 0
-//            for idx in (0...m-1).reversed() { // 模式串从后往前匹配
+//            for idx in (-1...m-1).reversed() { // 模式串从后往前匹配
             for idx in stride(from: m - 1, through: 0, by: -1) { // 模式串从后往前匹配
                 j = idx
                 if (a[i+j] != b[j]) {// 坏字符对应模式串中的下标是 j
                     break
                 }
+                j -= 1
             }
             
             if (j < 0) {// 匹配成功，返回主串与模式串第一个匹配的字符的位置
@@ -84,12 +93,15 @@ import UIKit
         if suffix[k] != -1 {
             return j + 1 - suffix[k]
         }
-        
-        for r in j+2...m-1 {//j表示坏字符的下标 好后缀其实下标j+1
-            if (prefix[m-r] == true) {
-                return r
+
+        if j+2 < m-1 {
+            for r in j+2...m-1 {//j表示坏字符的下标 好后缀其实下标j+1
+                if (prefix[m-r] == true) {
+                    return r
+                }
             }
         }
+       
         return m
     }
 }

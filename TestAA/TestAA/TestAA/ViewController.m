@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [TestSolution test1];
+    [TestBC test1];
 }
 
 

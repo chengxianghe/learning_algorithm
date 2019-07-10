@@ -23,10 +23,6 @@ import Foundation
         
         
 //        Solution.lengthOfLongestSubstring("pwwkew")
-        let a:[Character] = ["c","a","b","c","a","b","d","c","a","b"]
-        let b:[Character] = ["d","c","a","b"]
-
-        TestBC.bm(a: a, n: a.count, b: b, m: b.count)
         
 //        var suffix = Array.init(repeating: -1, count: b.count)
 //        var prefix = Array.init(repeating: false, count: b.count)
